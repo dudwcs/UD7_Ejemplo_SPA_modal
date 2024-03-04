@@ -43,6 +43,7 @@ function login(event) {
                
                 } else {
                     console.error('La autenticación ha fallado');
+                    showErrorLogin('La autenticación ha fallado', true, "errorLogin");
                 }
             }
             )
@@ -82,5 +83,28 @@ function toggleLoginMain(email) {
         main.innerHTML='';
     }
 
+}
+/**
+ * Muestra u oculta un mensaje en función de show en el html_id
+ * @param {string} msg Mensaje a mostrar
+ * @param {boolean} show true para mostrar, false en caso contrario
+ * @parma {string} html_id id del elemento html donde se mostrará/ocultará el mensaje
+ */
+function showErrorLogin(msg, show, html_id) {
+    var divError = document.getElementById(html_id);
+    if (show) {
+        divError.innerHTML = msg;
+        divError.classList.remove('d-none');
+        //setTimeout establece un temporizador que ejecuta una función o una pieza de código específica una vez que expira el temporizador.
+        setTimeout(function () {
+            divError.innerHTML = '';
+            divError.classList.add('d-none');
+        }
+        //El tiempo, en milisegundos, que el temporizador debe esperar antes de que se ejecute la función o el código especificado
+        , 2000);
+    } else {
+        divError.innerHTML = '';
+        divError.classList.add('d-none');
+    }
 }
 
