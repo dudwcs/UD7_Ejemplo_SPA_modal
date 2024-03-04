@@ -1,6 +1,7 @@
 <?php
 
-class UsuarioController {
+class UsuarioController
+{
 
     const VIEW_FOLDER = "user";
 
@@ -8,22 +9,25 @@ class UsuarioController {
     public $view;
     private UsuarioServicio $usuarioServicio;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->view = self::VIEW_FOLDER . DIRECTORY_SEPARATOR . 'login';
         $this->page_title = '';
         $this->usuarioServicio = new UsuarioServicio();
     }
 
-    public function list() {
+    public function list()
+    {
 
         $this->view = self::VIEW_FOLDER . DIRECTORY_SEPARATOR . 'list_user';
         $this->page_title = 'Listado de usuarios';
         $users = $this->usuarioServicio->getUsuarios();
-        
+
         return $users;
     }
 
-    public function login() {
+    public function login()
+    {
         //Para simplificar la implementación del ejemplo de SPA vamos a obviar la redirección en caso de que ya haya iniciado sesión
 
 
@@ -38,7 +42,8 @@ class UsuarioController {
             $userResult = $this->usuarioServicio->login($email, $pwd, $rolId);
 
             if ($userResult == null) {
-
+                //400 Bad Request
+                http_response_code(400);
                 $response["error"] = true;
                 return json_encode($response);
             } else {
@@ -48,7 +53,7 @@ class UsuarioController {
                 $_SESSION["email"] = $userResult->getEmail();
                 $_SESSION["roleId"] = $rolId;
                 $_SESSION["ultimoAcceso"] = time();
-              
+
 
                 $response["userId"] = $userResult->getId();
                 $response["email"] = $userResult->getEmail();
@@ -64,7 +69,8 @@ class UsuarioController {
 
 
 
-    public function register() {
+    public function register()
+    {
         $this->page_title = 'Registro de usuario';
         $this->view = self::VIEW_FOLDER . DIRECTORY_SEPARATOR . 'register_user';
 
@@ -77,7 +83,8 @@ class UsuarioController {
         }
     }
 
-    public function getRoles() {
+    public function getRoles()
+    {
         $app_roles = $this->usuarioServicio->getRoles();
         return json_encode($app_roles);
     }
