@@ -7,7 +7,7 @@ window.onload = onceLoaded;
 function onceLoaded() {
 
     console.debug("window loaded");
-    document.querySelector('#formLogin').onsubmit = loginJSON;
+    document.querySelector('#formLogin').onsubmit = confirmLoginJSON;
     
     getRoles();
 }

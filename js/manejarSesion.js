@@ -54,11 +54,19 @@ function login(event) {
 
 }
 
-
-
-function loginJSON(event) {
+function confirmLoginJSON(event) {
     //evitamos que se envíe el formulario de forma predefinida (la acción por defecto sería enviar los datos al servidor)
     event.preventDefault();
+    showModal("spa_modal", "Confirmación login", "¿Confirma que quiere iniciar sesión?", null, null, function () {
+        loginJSON();
+    }, null);
+
+}
+
+
+
+function loginJSON() {
+  
 
     let email = document.getElementById('email').value;
     let pwd = document.querySelector("#pwd").value;
