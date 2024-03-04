@@ -42,8 +42,8 @@ class UsuarioController
             $userResult = $this->usuarioServicio->login($email, $pwd, $rolId);
 
             if ($userResult == null) {
-                //400 Bad Request
-                http_response_code(400);
+                //401 Unauthorized
+                http_response_code(401);
                 $response["error"] = true;
                 return json_encode($response);
             } else {

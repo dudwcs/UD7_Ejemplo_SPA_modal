@@ -27,7 +27,7 @@ function login(event) {
                 if (response.status === 200) {
                     return response.json();
                     //bad request
-                } else if (response.status === 400) {
+                } else if ((response.status === 400) || (response.status===401)) {
                     console.log('error 400');
                     return false;
                 } else {
